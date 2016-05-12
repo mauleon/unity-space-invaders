@@ -24,7 +24,11 @@ public class ControlMarcador : MonoBehaviour
 	void Update ()
 	{
 		// Actualizamos el marcador
-		t.text = "Puntos: " + puntos.ToString () + "\n";
+		if (puntos >= 0) {
+			t.text = "Puntos: " + puntos.ToString () + "\n";
+		} else {
+			puntos = 0; t.text = "Puntos: " + puntos.ToString ();
+		}
 	}
 
 }
