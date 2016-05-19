@@ -1,19 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class ControlAlien : MonoBehaviour
 {
 	// Conexión al marcador, para poder actualizarlo
-	public GameObject marcador;
+	private GameObject marcador;
 
 	// Por defecto, 100 puntos por cada alien
-	public int puntos = 100;
+	private int puntos = 100;
+
+	// Objeto para reproducir la explosión de un alien
+	private GameObject efectoExplosion;
 
 	// Use this for initialization
 	void Start ()
 	{
 		// Localizamos el objeto que contiene el marcador
 		marcador = GameObject.Find ("Marcador");
+
+		// Objeto para reproducir la explosión de un alien
+		efectoExplosion = GameObject.Find ("EfectoExplosion");
 	}
 	
 	// Update is called once per frame
@@ -38,14 +45,12 @@ public class ControlAlien : MonoBehaviour
 			// El disparo desaparece (cuidado, si tiene eventos no se ejecutan)
 			Destroy (coll.gameObject);
 
-			// El alien desaparece (hay que añadir un retraso, si no, no se oye la explosión)
+			// El alien desaparece (no hace falta retraso para la explosión, está en otro objeto)
+			efectoExplosion.GetComponent<AudioSource> ().Play ();
+			Destroy (gameObject);
 
-			// Lo ocultamos...
-			GetComponent<Renderer> ().enabled = false;
-			GetComponent<Collider2D> ().enabled = false;
-
-			// ... y lo destruímos al cabo de 5 segundos, para dar tiempo al efecto de sonido
-			Destroy (gameObject, 5f);
+		} else if (coll.gameObject.tag == "nave") {
+			SceneManager.LoadScene ("Nivel1");
 		}
 	}
 }
