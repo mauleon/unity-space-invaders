@@ -72,4 +72,5 @@ public class ControlNave : MonoBehaviour
 		d.AddForce (Vector2.up * fuerza, ForceMode2D.Impulse);	
 	}
 
+
 }

@@ -13,9 +13,13 @@ public class ControlAlien : MonoBehaviour
 	// Objeto para reproducir la explosión de un alien
 	private GameObject efectoExplosion;
 
+
+
 	// Use this for initialization
 	void Start ()
 	{
+		
+
 		// Localizamos el objeto que contiene el marcador
 		marcador = GameObject.Find ("Marcador");
 
@@ -26,9 +30,8 @@ public class ControlAlien : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-	
+		
 	}
-
 	void OnCollisionEnter2D (Collision2D coll)
 	{
 		// Detectar la colisión entre el alien y otros elementos
@@ -50,7 +53,11 @@ public class ControlAlien : MonoBehaviour
 			Destroy (gameObject);
 
 		} else if (coll.gameObject.tag == "nave") {
-			SceneManager.LoadScene ("Nivel1");
+			
+		SceneManager.LoadScene ("Game Over");
+
+
+			;
 		}
 	}
 }
