@@ -4,9 +4,14 @@ using UnityEngine.SceneManagement;
 
 public class GeneradorAliens : MonoBehaviour
 {
-
+	private int contador = 0;
 	// Publicamos la variable para conectarla desde el editor
 	public Rigidbody2D prefabAlien1;
+	public Rigidbody2D prefabAlien2;
+	public Rigidbody2D prefabAlien3;
+
+
+	private Rigidbody2D alien;
 
 	// Referencia para guardar una matriz de objetos
 	private Rigidbody2D[,] aliens;
@@ -90,7 +95,7 @@ public class GeneradorAliens : MonoBehaviour
 
 		// Si no quedan aliens, hemos terminado
 		if( numAliens == 0 ) {
-			SceneManager.LoadScene ("Nivel1");
+			SceneManager.LoadScene ("Victoria");
 		}
 
 		// Si al menos un alien ha tocado el borde, todo el pack cambia de rumbo
@@ -136,9 +141,22 @@ public class GeneradorAliens : MonoBehaviour
 				// Posición de cada alien
 				Vector2 posicion = new Vector2 (origen.x + (espacioH * j), origen.y + (espacioV * i));
 
-				// Instanciamos el objeto partiendo del prefab
-				Rigidbody2D alien = (Rigidbody2D)Instantiate (prefabAlien1, posicion, transform.rotation);
 
+				if (contador == 0) {
+
+					// Instanciamos el objeto partiendo del prefab
+					alien = (Rigidbody2D)Instantiate (prefabAlien1, posicion, transform.rotation);
+					contador = contador + 1;
+				} else {
+					if (contador == 1) {
+						alien = (Rigidbody2D)Instantiate (prefabAlien2, posicion, transform.rotation);
+						contador = contador + 1;
+
+					} else {
+						alien = (Rigidbody2D)Instantiate (prefabAlien3, posicion, transform.rotation);
+						contador = 0;	
+					}  
+				}		
 				// Guardamos el alien en el array
 				aliens [i, j] = alien;
 

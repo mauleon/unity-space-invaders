@@ -9,6 +9,8 @@ public class ControlAlien : MonoBehaviour
 
 	// Por defecto, 100 puntos por cada alien
 	private int puntos = 100;
+	private int puntos2 = 80;
+	private int puntos3 = 50;
 
 	// Objeto para reproducir la explosión de un alien
 	private GameObject efectoExplosion;
@@ -42,8 +44,19 @@ public class ControlAlien : MonoBehaviour
 			// Sonido de explosión
 			GetComponent<AudioSource> ().Play ();
 
+			if (gameObject.tag == "alien1") {
+
 			// Sumar la puntuación al marcador
-			marcador.GetComponent<ControlMarcador> ().puntos += puntos;
+				marcador.GetComponent<ControlMarcador> ().puntos += puntos;	
+			} else {
+				if (gameObject.tag =="alien2") {
+					marcador.GetComponent<ControlMarcador> ().puntos += puntos2;	
+				} else {
+					marcador.GetComponent<ControlMarcador> ().puntos += puntos3;	
+				}
+			}
+
+
 
 			// El disparo desaparece (cuidado, si tiene eventos no se ejecutan)
 			Destroy (coll.gameObject);

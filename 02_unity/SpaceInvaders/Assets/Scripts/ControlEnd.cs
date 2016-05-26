@@ -16,6 +16,6 @@ public class ControlEnd : MonoBehaviour {
 		
 	}
 	public void Terminar(){
-	
-		Application.Quit();	}
+	Application.Quit();
+	}
 }
